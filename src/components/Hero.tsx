@@ -23,7 +23,7 @@ export default function Hero({ onStart }: Props) {
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-          className="mt-2 font-display text-7xl md:text-9xl leading-[0.95] shimmer-text"
+          className="mt-2 font-display text-7xl md:text-9xl leading-[1.3] shimmer-text"
         >
           Айзирек
         </motion.h1>
@@ -34,8 +34,8 @@ export default function Hero({ onStart }: Props) {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="mt-4 text-lg md:text-xl text-[color:var(--ink-soft)] font-medium"
         >
-          моё чудо{" "}
-          <span className="inline-block animate-[pulse-soft_2s_ease-in-out_infinite]">
+          Моё Чудо{" "}
+          <span className="inline-block animate-[pulse_2s_ease-in-out_infinite]">
             ✿
           </span>
         </motion.p>

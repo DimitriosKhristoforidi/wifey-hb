@@ -47,7 +47,7 @@ The site is designed so you can swap in your own words without touching the layo
 | What                                               | Where                                                    |
 | -------------------------------------------------- | -------------------------------------------------------- |
 | Her name & nickname on screen (Айзирек / МОЁ ЧУДО) | `src/components/Hero.tsx` and `public/heart.svg`         |
-| The hero subtitle ("моё чудо ✿")                   | `src/components/Hero.tsx`                                |
+| The hero subtitle ("моё Чудо ✿")                   | `src/components/Hero.tsx`                                |
 | The personal messages in the reveal                | `WISHES` array at the top of `src/components/Reveal.tsx` |
 | Tab title / browser metadata                       | `src/app/layout.tsx` (`metadata` export)                 |
 | Colors / palette                                   | CSS variables at the top of `src/app/globals.css`        |

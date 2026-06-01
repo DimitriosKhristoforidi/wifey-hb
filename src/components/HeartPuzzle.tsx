@@ -7,8 +7,11 @@ const SIZE = 3; // 3x3
 const TILE_COUNT = SIZE * SIZE;
 const EMPTY = TILE_COUNT - 1; // index 8 represents the empty slot
 
+const OFFER_THRESHOLD = 30;
+
 type Props = {
   onSolved: () => void;
+  onWantsQuiz: () => void;
 };
 
 function shuffleSolvable(): number[] {
@@ -38,13 +41,15 @@ function getNeighbors(idx: number): number[] {
   return out;
 }
 
-export default function HeartPuzzle({ onSolved }: Props) {
+export default function HeartPuzzle({ onSolved, onWantsQuiz }: Props) {
   const [tiles, setTiles] = useState<number[]>(() =>
     Array.from({ length: TILE_COUNT }, (_, i) => i),
   );
   const [moves, setMoves] = useState(0);
   const [started, setStarted] = useState(false);
   const [solved, setSolved] = useState(false);
+  // User dismissed the quiz offer; don't show it again until they shuffle.
+  const [offerDismissed, setOfferDismissed] = useState(false);
   // Ensures the win callback fires exactly once per play-through.
   const triggeredRef = useRef(false);
 
@@ -56,7 +61,11 @@ export default function HeartPuzzle({ onSolved }: Props) {
     setMoves(0);
     setStarted(true);
     setSolved(false);
+    setOfferDismissed(false);
   }, []);
+
+  const showOffer =
+    started && !solved && !offerDismissed && moves >= OFFER_THRESHOLD;
 
   const tryMove = useCallback(
     (idx: number) => {
@@ -98,7 +107,7 @@ export default function HeartPuzzle({ onSolved }: Props) {
     if (!started || triggeredRef.current) return;
     if (tiles.every((v, i) => v === i)) {
       triggeredRef.current = true;
-      setSolved(true);
+      setTimeout(() => setSolved(true), 900);
       // small delay so the last tile animation finishes
       const t = setTimeout(() => onSolved(), 900);
       return () => clearTimeout(t);
@@ -120,7 +129,7 @@ export default function HeartPuzzle({ onSolved }: Props) {
           transition={{ duration: 0.6 }}
           className="font-display text-5xl md:text-6xl shimmer-text"
         >
-          собери моё сердце
+          Собери моё сердце
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -129,7 +138,7 @@ export default function HeartPuzzle({ onSolved }: Props) {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mt-3 text-[color:var(--ink-soft)] text-base md:text-lg"
         >
-          нажми на кусочек рядом с пустым местом, чтобы передвинуть его. стрелки
+          Нажми на кусочек рядом с пустым местом, чтобы передвинуть его. Стрелки
           на клавиатуре тоже работают.
         </motion.p>
       </div>
@@ -233,7 +242,7 @@ export default function HeartPuzzle({ onSolved }: Props) {
           <div className="text-sm text-[color:var(--ink-soft)]">
             {started ? (
               <>
-                ходы:{" "}
+                Ходы:{" "}
                 <span className="font-semibold text-[color:var(--ink)]">
                   {moves}
                 </span>
@@ -243,16 +252,58 @@ export default function HeartPuzzle({ onSolved }: Props) {
             )}
           </div>
           <button onClick={shuffle} className="btn-ghost text-sm">
-            {started ? "перемешать снова" : "перемешать и играть"}
+            {started ? "Перемешать снова" : "Перемешать и играть"}
           </button>
         </div>
       </motion.div>
 
       {!started && (
         <p className="mt-4 text-xs uppercase tracking-[0.3em] text-[color:var(--ink-soft)]/70">
-          нажми «перемешать», чтобы начать
+          Нажми «Перемешать», чтобы начать
         </p>
       )}
+
+      <AnimatePresence>
+        {showOffer && (
+          <motion.div
+            key="quiz-offer"
+            initial={{ opacity: 0, y: -16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -16, scale: 0.96 }}
+            transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+            className="mt-6 glass rounded-3xl px-5 md:px-7 py-5 md:py-6 max-w-xl w-full"
+          >
+            <div className="flex items-start gap-3">
+              <div className="shrink-0 mt-1 text-2xl" aria-hidden>
+                💙
+              </div>
+              <div className="flex-1">
+                <p className="font-display text-2xl md:text-3xl text-[color:var(--ink)] leading-tight">
+                  Устала собирать?
+                </p>
+                <p className="mt-1 text-[color:var(--ink-soft)] text-sm md:text-base leading-relaxed">
+                  У меня есть для тебя другой путь к сюрпризу — маленькая
+                  викторина по «Off-Campus», той самой команде Briar.
+                  <br />
+                  {OFFER_THRESHOLD} ходов — и я подумал, что ты заслужила выбор
+                  ♡
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={onWantsQuiz}
+                    className="btn-primary text-sm md:text-base !py-2.5 !px-5"
+                  >
+                    Да, давай викторину →
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

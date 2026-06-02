@@ -140,7 +140,7 @@ export default function OffCampusQuiz({ onComplete }: Props) {
   return (
     <section
       id="quiz"
-      className="relative w-full px-6 py-20 md:py-24 flex flex-col items-center"
+      className="relative w-full px-6 py-20 md:py-24 flex flex-col justify-center items-center min-h-[100svh]"
     >
       <div className="text-center max-w-2xl">
         <motion.h2

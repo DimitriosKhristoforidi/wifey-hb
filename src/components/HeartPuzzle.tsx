@@ -119,7 +119,7 @@ export default function HeartPuzzle({ onSolved, onWantsQuiz }: Props) {
   return (
     <section
       id="puzzle"
-      className="relative w-full px-6 py-20 md:py-28 flex flex-col items-center"
+      className="relative w-full px-6 py-20 md:py-28 flex flex-col justify-center items-center min-h-[100svh]"
     >
       <div className="text-center max-w-2xl">
         <motion.h2

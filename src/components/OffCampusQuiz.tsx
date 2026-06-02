@@ -12,7 +12,7 @@ type Question = {
 // Все вопросы основаны на книжной серии Off-Campus (Elle Kennedy):
 // The Deal · The Mistake · The Score · The Goal.
 // Сериал «Off-Campus» снят по этим книгам, так что почти всё совпадает.
-// Можешь свободно править/удалять/добавлять — формат прозрачный.
+// Можешь свободно править/удалять/добавлять - формат прозрачный.
 const QUESTIONS: Question[] = [
   {
     q: "Где разворачивается история Off-Campus?",
@@ -45,7 +45,7 @@ const QUESTIONS: Question[] = [
     answer: 1,
   },
   {
-    q: "О ком вторая книга — «The Mistake»?",
+    q: "О ком вторая книга - «The Mistake»?",
     options: ["Dean", "Tucker", "Garrett", "Logan"],
     answer: 3,
   },
@@ -94,9 +94,9 @@ const QUESTIONS: Question[] = [
     options: ["Врачом", "Учительницей", "Журналисткой", "Юристом"],
     answer: 3,
   },
-  // Последний вопрос — и единственно правильный ответ ♡
+  // Последний вопрос - и единственно правильный ответ ♡
   {
-    q: "И самый важный вопрос — кто самый красивый парень?",
+    q: "И самый важный вопрос - кто самый красивый парень?",
     options: ["Garrett", "Dean", "Logan", "Мой муж"],
     answer: 3,
   },
@@ -158,7 +158,7 @@ export default function OffCampusQuiz({ onComplete }: Props) {
           className="mt-3 text-[color:var(--ink-soft)] text-base md:text-lg"
         >
           {total} коротких вопросов о Briar University, Хоккее и Команде,
-          которую ты так любишь. Правильные ответы не нужны — сюрприз будет в
+          которую ты так любишь. Правильные ответы не нужны - сюрприз будет в
           любом случае ♡
         </motion.p>
       </div>
@@ -264,7 +264,7 @@ export default function OffCampusQuiz({ onComplete }: Props) {
                       ? "Почти всё помнишь! Настоящая фанатка ♡"
                       : score >= Math.ceil(total * 0.5)
                         ? "Очень даже неплохо! 💙"
-                        : "Счёт не главное — главное, что ты дошла до конца ♡"}
+                        : "Счёт не главное - главное, что ты дошла до конца ♡"}
                 </p>
                 <p className="mt-2 text-sm text-[color:var(--ink-soft)]">
                   Открываю сюрприз…

@@ -282,10 +282,10 @@ export default function HeartPuzzle({ onSolved, onWantsQuiz }: Props) {
                   Устала собирать?
                 </p>
                 <p className="mt-1 text-[color:var(--ink-soft)] text-sm md:text-base leading-relaxed">
-                  У меня есть для тебя другой путь к сюрпризу — маленькая
+                  У меня есть для тебя другой путь к сюрпризу - маленькая
                   викторина по «Off-Campus», той самой команде Briar.
                   <br />
-                  {OFFER_THRESHOLD} ходов — и я подумал, что ты заслужила выбор
+                  {OFFER_THRESHOLD} ходов - и я подумал, что ты заслужила выбор
                   ♡
                 </p>
 

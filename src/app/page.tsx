@@ -44,7 +44,7 @@ export default function Home() {
       <SceneBackground />
       <Hero onStart={scrollToGame} />
 
-      <div id="game">
+      <div id="game" className="min-h-[100svh]">
         <AnimatePresence mode="wait">
           {mode === "puzzle" ? (
             <motion.div
